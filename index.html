@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#24352f">
+  <meta name="description" content="Crees un souvenir : transforme tes photos en vidéos avec musique, textes, collages et voix off.">
+  <meta name="keywords" content="crees un souvenir, album photo, vidéo souvenir, diaporama photo, musique, voix off, collage photo">
+  <meta name="author" content="crees un souvenir">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://creesunsouvenir.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="crees un souvenir">
+  <meta property="og:title" content="crees un souvenir | Crée ta vidéo souvenir">
+  <meta property="og:description" content="Transforme tes photos en un film avec ta musique, tes textes et ta voix.">
+  <meta property="og:url" content="https://creesunsouvenir.com/">
+  <meta name="twitter:card" content="summary">
+  <title>crees un souvenir | Studio vidéo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar"><a class="brand" href="#top"><span class="brand-icon">✦</span><span>crees un souvenir</span></a><div class="header-actions"><button class="quiet-button" id="newProject" type="button">Nouveau</button><button class="save-button" id="saveProject" type="button">Enregistrer <span>↗</span></button></div></header>
+    <main id="top" class="main-content">
+      <section class="hero"><p class="eyebrow">Le studio de tes souvenirs</p><h1>Des images qui<br><em>racontent une histoire.</em></h1><p class="hero-text">Transforme tes photos en un petit film avec ta musique, tes mots et ta voix.</p></section>
+      <section class="studio" aria-label="Studio de création vidéo">
+        <aside class="project-panel"><div class="section-title"><span class="step">01</span><div><p class="section-label">Ton projet</p><h2>Le souvenir</h2></div></div><label for="projectName">Nom de la vidéo</label><input id="projectName" maxlength="48" value="Les petits bonheurs" placeholder="Ex : Été 2024"><label for="projectNote">Une petite note <small>(facultatif)</small></label><textarea id="projectNote" rows="3" maxlength="120" placeholder="Ce que tu veux garder en tête..."></textarea><div class="project-summary"><span class="summary-icon">▶</span><div><strong id="summaryName">Les petits bonheurs</strong><span id="summaryMeta">0 scène · 0:00</span></div></div></aside>
+        <section class="editor-panel">
+          <div class="section-title editor-heading"><div><p class="section-label">02 · Les scènes</p><h2>Ajoute tes photos</h2></div><span id="sceneCount" class="count-pill">0 scène</span></div>
+          <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Ajouter des photos"><input id="photoInput" type="file" accept="image/*" multiple><div class="upload-icon">＋</div><strong>Dépose tes photos ici</strong><p>ou <button id="browseButton" type="button">parcours ton téléphone</button></p><small>JPG, PNG ou WEBP · jusqu'à 20 scènes</small></div>
+          <div id="gallery" class="gallery" aria-live="polite"></div><div id="emptyState" class="empty-state"><span>▧</span><p>Ajoute des photos pour commencer<br>à construire ta vidéo.</p></div>
+          <div id="sceneEditor" class="scene-editor" hidden><div class="scene-editor-head"><div><p class="section-label">03 · La scène choisie</p><h3 id="sceneLabel">Scène 1</h3></div><span id="scenePosition">1 / 1</span></div><label for="sceneCaption">Texte sur cette photo</label><input id="sceneCaption" maxlength="80" placeholder="Une date, un mot, une émotion..."></div>
+          <div class="settings"><div class="section-title settings-title"><div><p class="section-label">04 · Le style</p><h2>Donne-lui du rythme</h2></div></div><div class="settings-grid"><div><label for="collageSelect">Type de collage</label><select id="collageSelect"><option value="focus">Photo centrée</option><option value="mosaic">Mosaïque 2 × 2</option><option value="filmstrip">Bande cinéma</option><option value="stack">Cartes superposées</option></select></div><div><label for="durationSelect">Durée par scène</label><select id="durationSelect"><option value="2">2 secondes</option><option value="3" selected>3 secondes</option><option value="4">4 secondes</option><option value="5">5 secondes</option></select></div></div><div class="media-row"><div class="media-card"><span class="media-icon">♫</span><div><strong>Ta chanson</strong><span id="musicName">Aucune musique ajoutée</span></div><button id="musicButton" type="button">Ajouter</button><input id="musicInput" type="file" accept="audio/*" hidden></div><div class="media-card"><span class="media-icon">◉</span><div><strong>Ta voix off</strong><span id="voiceStatus">Explique chaque moment</span></div><button id="voiceButton" type="button">Enregistrer</button></div></div><div id="recordingBar" class="recording-bar" hidden><i></i><span id="recordingTime">00:00</span><span>Parle maintenant pour raconter ce moment.</span><button id="stopVoice" type="button">Arrêter</button></div></div>
+          <div class="preview"><div class="preview-head"><div><p class="section-label">05 · Le résultat</p><h2>Prévisualise ta vidéo</h2></div><span id="previewStatus">Prête à être créée</span></div><div class="video-frame"><canvas id="previewCanvas" width="720" height="720"></canvas><div id="previewEmpty">Ajoute des photos<br>pour voir ton film ici</div><button id="playButton" class="play-button" type="button" aria-label="Lire la vidéo">▶</button></div><div class="export-actions"><button id="exportButton" class="primary-action" type="button">Créer et télécharger <span>↓</span></button><button id="shareButton" class="secondary-action" type="button">Envoyer sur WhatsApp <span>↗</span></button></div><p class="export-note">La vidéo est créée dans ton navigateur et reste sur ton appareil.</p></div>
+        </section>
+      </section>
+      <footer><span><i></i> Tes fichiers restent sur ton appareil</span><span>Fait avec soin pour tes souvenirs</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "crees un souvenir",
+      "url": "https://creesunsouvenir.com/",
+      "description": "Application pour créer une vidéo souvenir à partir de photos, musique, textes et voix off.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web"
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
